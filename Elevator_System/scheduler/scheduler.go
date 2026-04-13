@@ -1,10 +1,6 @@
 package scheduler
 
-import (
-	"elevator_system/elevator"
-	"elevator_system/request"
-	"fmt"
-)
+import "fmt"
 
 type SchedulerType int
 
@@ -22,11 +18,6 @@ func (s SchedulerType) String() string {
 	default:
 		return "Unknown"
 	}
-}
-
-type ElevatorScheduler interface {
-	AssignElevator(elevators []*elevator.Elevator, req request.Request) *elevator.Elevator
-	String() string
 }
 
 func NewScheduler(schedulerType SchedulerType) (ElevatorScheduler, error) {

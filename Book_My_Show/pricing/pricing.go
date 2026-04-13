@@ -5,12 +5,7 @@ import (
 	"time"
 )
 
-type PricingStrategy interface {
-	CalculatePrice(seatType theatre.SeatType) float64
-	GetMultiplier() float64
-}
 
-// --- Concrete Strategies ---
 
 type regularPricing struct{}
 

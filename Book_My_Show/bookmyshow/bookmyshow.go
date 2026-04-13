@@ -11,21 +11,6 @@ import (
 	"time"
 )
 
-type BookingService interface {
-	SearchMovies(title string) []*movie.Movie
-	GetShows(movieID, city string) []*show.Show
-	BookTickets(userName, showID string, seatIDs []int) (*booking.Booking, error)
-	CancelBooking(bookingID string) error
-}
-
-type AdminService interface {
-	AddTheatre(theatre *theatre.Theatre)
-	AddScreen(theatreID string, screen *theatre.Screen) error
-	AddMovie(movie *movie.Movie)
-	AddShow(id string, movieID, theatreID string, screenNumber int, startTime time.Time) (*show.Show, error)
-	RemoveShow(showID string) error
-}
-
 type BookMyShow struct {
 	mu             sync.Mutex
 	Theatres       map[string]*theatre.Theatre

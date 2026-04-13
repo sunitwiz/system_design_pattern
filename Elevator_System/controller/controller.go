@@ -8,18 +8,6 @@ import (
 	"sync"
 )
 
-type ElevatorOperations interface {
-	RequestElevator(sourceFloor, destFloor int) (*elevator.Elevator, error)
-	StepAll()
-	ViewStatus()
-}
-
-type AdminOperations interface {
-	AddElevator(id int)
-	RemoveElevator(id int) error
-	SetScheduler(s scheduler.ElevatorScheduler)
-}
-
 type ElevatorController struct {
 	mu        sync.Mutex
 	Elevators []*elevator.Elevator
