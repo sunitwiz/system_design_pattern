@@ -24,13 +24,6 @@ func (v VehicleType) String() string {
 	}
 }
 
-// Vehicle is the interface that all vehicle types must implement.
-type Vehicle interface {
-	GetType() VehicleType
-	GetLicensePlate() string
-	String() string
-}
-
 // --- Concrete Vehicle Types ---
 
 type motorcycleVehicle struct {

@@ -7,12 +7,6 @@ import (
 	"time"
 )
 
-// FeeStrategy is the Strategy interface for calculating parking fees.
-type FeeStrategy interface {
-	CalculateFee(duration time.Duration) float64
-	GetRatePerHour() float64
-}
-
 // --- Concrete Strategies ---
 
 type motorcycleFee struct{}

@@ -9,32 +9,13 @@ import (
 	"sync"
 )
 
-// ParkingOperations defines the interface for parking/unparking vehicles.
-type ParkingOperations interface {
-	ParkVehicle(v vehicle.Vehicle) (*ticket.ParkingTicket, error)
-	UnparkVehicle(ticketID string) (*ticket.ParkingTicket, error)
-}
 
-// AdminOperations defines the interface for admin management features.
-type AdminOperations interface {
-	ViewStatus()
-	AddLevel(motorcycleSlots, carSlots, busSlots int)
-	RemoveLevel(levelNumber int) error
-	AddSlot(levelNumber int, slotType slot.SlotType) error
-	RemoveSlot(levelNumber int, slotID int) error
-}
-
-// ParkingLot is the core orchestrator implementing both interfaces.
 type ParkingLot struct {
 	mu            sync.Mutex
 	Levels        []*level.ParkingLevel
 	ActiveTickets map[string]*ticket.ParkingTicket
 	ticketCounter int
 }
-
-// Compile-time interface checks.
-var _ ParkingOperations = (*ParkingLot)(nil)
-var _ AdminOperations = (*ParkingLot)(nil)
 
 // singleton instance
 var (
