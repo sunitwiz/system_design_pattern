@@ -11,18 +11,7 @@ const (
 	Bus
 )
 
-func (v VehicleType) String() string {
-	switch v {
-	case Motorcycle:
-		return "Motorcycle"
-	case Car:
-		return "Car"
-	case Bus:
-		return "Bus"
-	default:
-		return "Unknown"
-	}
-}
+
 
 // --- Concrete Vehicle Types ---
 

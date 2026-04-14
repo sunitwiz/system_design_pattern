@@ -10,18 +10,7 @@ const (
 	Idle
 )
 
-func (d Direction) String() string {
-	switch d {
-	case Up:
-		return "Up"
-	case Down:
-		return "Down"
-	case Idle:
-		return "Idle"
-	default:
-		return "Unknown"
-	}
-}
+
 
 type RequestType int
 
@@ -30,16 +19,7 @@ const (
 	Internal
 )
 
-func (r RequestType) String() string {
-	switch r {
-	case External:
-		return "External"
-	case Internal:
-		return "Internal"
-	default:
-		return "Unknown"
-	}
-}
+
 
 type Request struct {
 	SourceFloor      int

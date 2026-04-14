@@ -14,19 +14,6 @@ const (
 	StatusMaintenance
 )
 
-func (s Status) String() string {
-	switch s {
-	case StatusIdle:
-		return "Idle"
-	case StatusMoving:
-		return "Moving"
-	case StatusMaintenance:
-		return "Maintenance"
-	default:
-		return "Unknown"
-	}
-}
-
 type Elevator struct {
 	ID           int
 	CurrentFloor int
