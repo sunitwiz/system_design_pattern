@@ -46,6 +46,7 @@ func (b *busFee) CalculateFee(duration time.Duration) float64 {
 func (b *busFee) GetRatePerHour() float64 { return 5.0 }
 
 // GetFeeStrategy returns the appropriate fee strategy for a vehicle type.
+// factory method
 func GetFeeStrategy(vType vehicle.VehicleType) (FeeStrategy, error) {
 	switch vType {
 	case vehicle.Motorcycle:

@@ -11,22 +11,22 @@ type windowEntry struct {
 	count       int
 }
 
-type fixedWindow struct {
+type FixedWindow struct {
 	mu          sync.Mutex
 	maxRequests int
 	windowSize  time.Duration
 	counters    map[string]*windowEntry
 }
 
-func newFixedWindow(cfg config.RateLimiterConfig) *fixedWindow {
-	return &fixedWindow{
+func newFixedWindow(cfg config.RateLimiterConfig) *FixedWindow {
+	return &FixedWindow{
 		maxRequests: cfg.MaxRequests,
 		windowSize:  cfg.WindowSize,
 		counters:    make(map[string]*windowEntry),
 	}
 }
 
-func (fw *fixedWindow) Allow(key string) bool {
+func (fw *FixedWindow) Allow(key string) bool {
 	fw.mu.Lock()
 	defer fw.mu.Unlock()
 
@@ -46,6 +46,6 @@ func (fw *fixedWindow) Allow(key string) bool {
 	return true
 }
 
-func (fw *fixedWindow) GetLimit() int                    { return fw.maxRequests }
-func (fw *fixedWindow) GetWindowSize() time.Duration     { return fw.windowSize }
-func (fw *fixedWindow) GetAlgorithmType() AlgorithmType  { return FixedWindowType }
+func (fw *FixedWindow) GetLimit() int                    { return fw.maxRequests }
+func (fw *FixedWindow) GetWindowSize() time.Duration     { return fw.windowSize }
+func (fw *FixedWindow) GetAlgorithmType() AlgorithmType  { return FixedWindowType }

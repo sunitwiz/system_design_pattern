@@ -6,22 +6,22 @@ import (
 	"time"
 )
 
-type slidingWindow struct {
+type SlidingWindow struct {
 	mu          sync.Mutex
 	maxRequests int
 	windowSize  time.Duration
 	requestLog  map[string][]time.Time
 }
 
-func newSlidingWindow(cfg config.RateLimiterConfig) *slidingWindow {
-	return &slidingWindow{
+func newSlidingWindow(cfg config.RateLimiterConfig) *SlidingWindow {
+	return &SlidingWindow{
 		maxRequests: cfg.MaxRequests,
 		windowSize:  cfg.WindowSize,
 		requestLog:  make(map[string][]time.Time),
 	}
 }
 
-func (sw *slidingWindow) Allow(key string) bool {
+func (sw *SlidingWindow) Allow(key string) bool {
 	sw.mu.Lock()
 	defer sw.mu.Unlock()
 
@@ -44,6 +44,6 @@ func (sw *slidingWindow) Allow(key string) bool {
 	return true
 }
 
-func (sw *slidingWindow) GetLimit() int                    { return sw.maxRequests }
-func (sw *slidingWindow) GetWindowSize() time.Duration     { return sw.windowSize }
-func (sw *slidingWindow) GetAlgorithmType() AlgorithmType  { return SlidingWindowType }
+func (sw *SlidingWindow) GetLimit() int                    { return sw.maxRequests }
+func (sw *SlidingWindow) GetWindowSize() time.Duration     { return sw.windowSize }
+func (sw *SlidingWindow) GetAlgorithmType() AlgorithmType  { return SlidingWindowType }

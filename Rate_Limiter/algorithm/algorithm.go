@@ -3,7 +3,6 @@ package algorithm
 import (
 	"fmt"
 	"rate_limiter/config"
-	"time"
 )
 
 type AlgorithmType int
@@ -25,13 +24,6 @@ func (a AlgorithmType) String() string {
 	default:
 		return "Unknown"
 	}
-}
-
-type RateLimiter interface {
-	Allow(key string) bool
-	GetLimit() int
-	GetWindowSize() time.Duration
-	GetAlgorithmType() AlgorithmType
 }
 
 func NewRateLimiter(algorithmType AlgorithmType, cfg config.RateLimiterConfig) (RateLimiter, error) {

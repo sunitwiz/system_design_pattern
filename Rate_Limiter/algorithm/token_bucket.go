@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type tokenBucket struct {
+type TokenBucket struct {
 	mu         sync.Mutex
 	capacity   int
 	refillRate float64
@@ -14,8 +14,8 @@ type tokenBucket struct {
 	lastRefill map[string]time.Time
 }
 
-func newTokenBucket(cfg config.RateLimiterConfig) *tokenBucket {
-	return &tokenBucket{
+func newTokenBucket(cfg config.RateLimiterConfig) *TokenBucket {
+	return &TokenBucket{
 		capacity:   cfg.BucketCapacity,
 		refillRate: cfg.RefillRate,
 		tokens:     make(map[string]float64),
@@ -23,7 +23,7 @@ func newTokenBucket(cfg config.RateLimiterConfig) *tokenBucket {
 	}
 }
 
-func (tb *tokenBucket) Allow(key string) bool {
+func (tb *TokenBucket) Allow(key string) bool {
 	tb.mu.Lock()
 	defer tb.mu.Unlock()
 
@@ -49,6 +49,6 @@ func (tb *tokenBucket) Allow(key string) bool {
 	return false
 }
 
-func (tb *tokenBucket) GetLimit() int              { return tb.capacity }
-func (tb *tokenBucket) GetWindowSize() time.Duration { return 0 }
-func (tb *tokenBucket) GetAlgorithmType() AlgorithmType { return TokenBucketType }
+func (tb *TokenBucket) GetLimit() int                    { return tb.capacity }
+func (tb *TokenBucket) GetWindowSize() time.Duration     { return 0 }
+func (tb *TokenBucket) GetAlgorithmType() AlgorithmType  { return TokenBucketType }
