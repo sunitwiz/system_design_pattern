@@ -13,35 +13,9 @@ const (
 	PercentSplit
 )
 
-func (s SplitType) String() string {
-	switch s {
-	case EqualSplit:
-		return "Equal"
-	case ExactSplit:
-		return "Exact"
-	case PercentSplit:
-		return "Percent"
-	default:
-		return "Unknown"
-	}
-}
-
 type Split interface {
 	Calculate(totalAmount float64, participants []string, details map[string]float64) (map[string]float64, error)
 	GetType() SplitType
-}
-
-func NewSplit(splitType SplitType) (Split, error) {
-	switch splitType {
-	case EqualSplit:
-		return &equalSplit{}, nil
-	case ExactSplit:
-		return &exactSplit{}, nil
-	case PercentSplit:
-		return &percentSplit{}, nil
-	default:
-		return nil, fmt.Errorf("unknown split type: %d", splitType)
-	}
 }
 
 type equalSplit struct{}
@@ -103,3 +77,16 @@ func (ps *percentSplit) Calculate(totalAmount float64, _ []string, details map[s
 }
 
 func (ps *percentSplit) GetType() SplitType { return PercentSplit }
+
+func NewSplit(splitType SplitType) (Split, error) {
+	switch splitType {
+	case EqualSplit:
+		return &equalSplit{}, nil
+	case ExactSplit:
+		return &exactSplit{}, nil
+	case PercentSplit:
+		return &percentSplit{}, nil
+	default:
+		return nil, fmt.Errorf("unknown split type: %d", splitType)
+	}
+}
